@@ -4,14 +4,42 @@
 <meta charset="utf-8">
     <script src = "http://code.jquery.com/jquery-1.9.1.js"></script>
     <script>
+    //Browser Support Code
+    function ajaxFunction(){
+      var ajaxRequest;  // The variable that makes Ajax possible!
+  
+      try{
+        // Opera 8.0+, Firefox, Safari
+        ajaxRequest = new XMLHttpRequest();
+      } catch (e){
+        // Internet Explorer Browsers
+        try{
+          ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch (e) {
+          try{
+            ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+          } catch (e){
+            // Something went wrong
+            alert("Your browser broke!");
+            return false;
+          }
+        }
+      }
+    }
+    //-->
     $(function display()
     {
         $("#query1 span").html(localStorage.getItem('query1'));
         $("#query2 span").html(localStorage.getItem('query2'));
         $("#query3 span").html(localStorage.getItem('query3'));
+
+        $('div.toggle2').hide();
+        $('.toggle-button').click(function(){
+          $('div.toggle').hide();
+          $('div.toggle2').show();
+        });
        
     });
-       
        
     function testResults (form)
     {
@@ -23,12 +51,13 @@
         localStorage.setItem('query2', TestVar2);
        
     }
+
     </script>
 <link rel="stylesheet" type="text/css" href="/stylesheets/soaringStyle.css">
 <title>Soaring Tunes</title>
 </head>
  
-<div id="wrap">
+<div id="wrap" class="toggle">
 <body>
 <div class="header">
   <h1>Soaring Tunes</h1>
@@ -37,11 +66,11 @@
   <h3>Which #hashtags would you like to search?</h3>
   <p>
   <span>
-    <label for="textfield">Query 1:</label>
+    <label for="textfield">Query 1: #</label>
     <input type="text" name="textfield" id="textfield" Value="">
   </span>
   <span>
-    <label for="textfield2">Query 2:</label>
+    <label for="textfield2">Query 2: #</label>
     <input type="text" name="textfield2" id="textfield2" Value="">
   </span>
   </p>
@@ -62,7 +91,7 @@
     <input name="number" type="number" id="number" max="250" min="1">
   </p>
   <p>
-    <input type="button" name="submit" id="submit" value="Submit" onClick="testResults(this.form)">
+    <input class="toggle-button" type="button" name="submit" id="submit" value="Submit" onClick="testResults(this.form)">
   </p>
 </form>
 <div class="lastSearches">
@@ -95,4 +124,14 @@
 <span>&copy; Arrowsmith 2013</span>
 </footer>
 </div>
+
+<div class="toggle2">
+
+<h1>magical appearing results page</h1>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<h1> pauls crazy html here </h1>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</div>
+      
 </html>
