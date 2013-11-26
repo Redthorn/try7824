@@ -33,6 +33,10 @@ app.get('/', function (req, res)
 {
     res.render('index.html');
 });
+app.get('/results', function (req, res)
+{
+	res.render('results.html');
+});
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
