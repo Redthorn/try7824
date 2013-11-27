@@ -2,6 +2,15 @@
 <html>
 <head>
 <script src="http://connect.soundcloud.com/sdk.js"></script>
+<script src = "http://code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+  $(function display()
+  {
+    $("#query1 span").html(localStorage.getItem('query1'));
+    $("#query2 span").html(localStorage.getItem('query2'));
+  });
+
+</script>
 <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="/stylesheets/soaringStyle.css">
 <title>Soaring Tunes</title>
@@ -9,9 +18,11 @@
 
 <body>
 <link rel="stylesheet" href="resultspage.css">
-<div align="center">
+<div id="wrap" align="center">
   <h1>Results</h1>
-  <p>#one #two</p>
+  <p>You Searched:</p>
+  
+    <div id="query1">#<span></span></div><div id="query2">#<span></span></div>
   <p>
   <script>
 SC.initialize({

@@ -32,13 +32,6 @@
         $("#query1 span").html(localStorage.getItem('query1'));
         $("#query2 span").html(localStorage.getItem('query2'));
         $("#query3 span").html(localStorage.getItem('query3'));
-
-        $('div.toggle2').hide();
-        $('.toggle-button').click(function(){
-          $('div.toggle').hide();
-          $('div.toggle2').show();
-        });
-       
     });
        
     function testResults (form)
@@ -57,12 +50,12 @@
 <title>Soaring Tunes</title>
 </head>
  
-<div id="wrap" class="toggle">
+<div id="wrap">
 <body>
 <div class="header">
   <h1>Soaring Tunes</h1>
 </div>
-<form id="form1" name="form1" method="get">
+<form id="form1" name="form1" method="post" action= "/form">
   <h3>Which #hashtags would you like to search?</h3>
   <p>
   <span>
@@ -91,7 +84,7 @@
     <input name="number" type="number" id="number" max="250" min="1">
   </p>
   <p>
-    <input class="toggle-button" type="button" name="submit" id="submit" value="Submit" onClick="testResults(this.form)">
+    <input type="submit" name="submit" id="submit" value="Submit" onClick="testResults(this.form)">
   </p>
 </form>
 <div class="lastSearches">
@@ -123,15 +116,6 @@
 <span><a href="http://developers.soundcloud.com/docs"><img src = "http://developers.soundcloud.com/assets/powered_by_black.png"></a></span>
 <span>&copy; Arrowsmith 2013</span>
 </footer>
-</div>
-
-<div class="toggle2">
-
-<h1>magical appearing results page</h1>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<h1> pauls crazy html here </h1>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
 </div>
       
 </html>

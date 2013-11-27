@@ -38,6 +38,16 @@ app.get('/results', function (req, res)
 	res.render('results.html');
 });
 
+app.post('/form', function (req, res)
+{
+	var hash1 = req.body.textfield1;
+	var hash2 = req.body.textfield2;
+
+	res.redirect('/results');
+	res.location('/results');
+	console.log("post received", hash1, hash2);
+});
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
