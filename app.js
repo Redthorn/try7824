@@ -4,9 +4,9 @@
 
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
+var fs = require('fs');
 
 var app = express();
 
@@ -40,8 +40,14 @@ app.get('/results', function (req, res)
 
 app.post('/form', function (req, res)
 {
-	var hash1 = req.body.textfield1;
-	var hash2 = req.body.textfield2;
+	var hash1 = (req.body.textfield).toLowerCase();
+	var hash2 = (req.body.textfield2).toLowerCase();
+
+	fs.writeFile('views/hashlist.txt', hash1 + "\n" + hash2, function (err) {
+  		if (err) throw err;
+  		console.log('It\'s saved!');
+	});
+
 
 	res.redirect('/results');
 	res.location('/results');
