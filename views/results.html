@@ -17,9 +17,10 @@
 </head>
 
 <body>
-<link rel="stylesheet" href="resultspage.css">
 <div id="wrap" align="center">
+<div class="header">
   <h1>Results</h1>
+</div>
   <p>You Searched:</p>
   
     <div id="query1">#<span></span></div><div id="query2">#<span></span></div>
@@ -37,31 +38,44 @@ SC.oEmbed(track_url, { auto_play: true }, function(oEmbed) {
 	<strong>Sentiment Score:</strong> 101
 	</p>
     	<span>
-		<div align="left">
-		  <p>Sorting by: </p>
-          <table width="89" height="54">
-              <tr>
-                <td><label>
-                  <input type="radio" value="radio">
-                  Highest</label></td>
-              </tr>
-              <tr>
-                <td><label>
-                  <input type="radio" value="radio">
-                  Lowest</label></td>
-              </table>
-          </tr>
-			put tweets here lol
-		</div>
-        </span>
+        <h4>Sort By: </h4>
+<input type="radio" name="group1" value="radio" checked>Highest</label>
+<input type="radio" name="group1" value="radio">Lowest</label>
+      </span>
 	</p>
+  <hr>
+  <div class="scrollBox">
+  <ul>
+    <li>#1</li>
+    <li>#2</li>
+    <li>#3</li>
+    <li>#4</li>
+    <li>#5</li>
+    <li>#6</li>
+    <li>#7</li>
+    <li>#8</li>
+    <li>#9</li>
+    <li>#10</li>
+    <li>#11</li>
+    <li>#12</li>
+    <li>#13</li>
+    <li>#14</li>
+    <li>#15</li>
+    <li>#16</li>
+    <li>#17</li>
+    <li>#18</li>
+    <li>#19</li>
+    <li>#20</li>
+    <li>just placeholders, output will be looped</li>
+  </ul>
+</div>
 <figure>
   <figcaption></figcaption>
 </figure>
 </div>
-</link>
+</div>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
 
 </body>
 </html>

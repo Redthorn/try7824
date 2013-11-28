@@ -43,6 +43,9 @@ app.post('/form', function (req, res)
 	var hash1 = (req.body.textfield).toLowerCase();
 	var hash2 = (req.body.textfield2).toLowerCase();
 
+	var hashlist = new Array(10);
+	var hashfreq = new Array(10);
+	
 	fs.writeFile('views/hashlist.txt', hash1 + "\n" + hash2, function (err) {
   		if (err) throw err;
   		console.log('It\'s saved!');

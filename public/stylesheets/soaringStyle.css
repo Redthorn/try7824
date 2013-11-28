@@ -47,7 +47,7 @@ background-image: linear-gradient(to bottom, #CCCCCC 0%, #FF7700 100%);
 }
 
 .scrollBox {
-    height: 100px;
+    height: 300px;
     overflow-y: auto;
 }
 

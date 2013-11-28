@@ -27,22 +27,41 @@
       }
     }
     //-->
+
+    //display previous searches
     $(function display()
     {
         $("#query1 span").html(localStorage.getItem('query1'));
         $("#query2 span").html(localStorage.getItem('query2'));
         $("#query3 span").html(localStorage.getItem('query3'));
     });
-       
+
+    //set endDate as default current day
+    $(document).ready(function(){
+        var now = new Date();
+        var month = (now.getMonth() + 1);               
+        var day = now.getDate();
+        if(month < 10) 
+            month = "0" + month;
+        if(day < 10) 
+            day = "0" + day;
+        var today = now.getFullYear() + '-' + month + '-' + day;
+        $('#endDate').val(today);
+    });
+      
+    //store variables to localStorage 
     function testResults (form)
     {
-        var TestVar = form.textfield.value;
-        var TestVar2 = form.textfield2.value;
-        //alert ("You typed:   " + TestVar + "    " + TestVar2);
+        var Hashtag1 = form.textfield.value;
+        var Hashtag2 = form.textfield2.value;
+        var startDate = form.startDate.value;
+        var endDate = form.endDate.value;
+        //alert ("You typed:   " + Hashtag1 + "    " + Hashtag2);
         localStorage.setItem('query3', localStorage.getItem('query1'));
-        localStorage.setItem('query1', TestVar);
-        localStorage.setItem('query2', TestVar2);
-       
+        localStorage.setItem('query1', Hashtag1);
+        localStorage.setItem('query2', Hashtag2);
+        localStorage.setItem('startDate', startDate);
+        localStorage.setItem('endDate', endDate);
     }
 
     </script>
@@ -81,7 +100,7 @@
   <h3>Search Radius</h3>
   <p>
     <label for="number"> Radius (miles): </label>
-    <input name="number" type="number" id="number" max="250" min="1">
+    <input name="number" type="number" id="number" max="250" min="1" value="25">
   </p>
   <p>
     <input type="submit" name="submit" id="submit" value="Submit" onClick="testResults(this.form)">
@@ -96,7 +115,7 @@
   </ul>
 </div>
   <h2>Top 10 Most Popular Searches</h2>
-  <div class="scrollBox">
+  <div>
   <ul>
     <li>#1</li>
     <li>#2</li>
