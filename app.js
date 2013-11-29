@@ -42,13 +42,13 @@ app.post('/form', function (req, res)
 
 	hashlist[0] = hash1;
 	hashlist[1] = hash2;
-	
+
 	//save array to html file for ajax display
 	var bigString = '<ol>';
 	for(var i=0; i < 10; i++)
 	{
 		bigString += '<li>';
-		bigString += hashlist[i];
+		bigString += '#' + hashlist[i];
 		bigString += '</li>'
 	}
 	bigString += '</ol>'
