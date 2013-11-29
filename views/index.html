@@ -30,6 +30,8 @@
             day = "0" + day;
         var today = now.getFullYear() + '-' + month + '-' + day;
         $('#endDate').val(today);
+        var first = now.getFullYear() + '-' + month + '-' + '01';
+        $('#startDate').val(first);
     });
       
     //store variables to localStorage 

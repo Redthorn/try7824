@@ -35,15 +35,29 @@ app.get('/hashlist',function (req, res){res.render('hashlist.html');});
 
 app.post('/form', function (req, res)
 {
+	var hashlist = new Array(10);
+	var hashfreq = new Array(10);
 	var hash1 = (req.body.textfield).toLowerCase();
 	var hash2 = (req.body.textfield2).toLowerCase();
 
-	var hashlist = new Array(10);
-	var hashfreq = new Array(10);
+	hashlist[0] = hash1;
+	hashlist[1] = hash2;
+	
+	//save array to html file for ajax display
+	var bigString = '<ol>';
+	for(var i=0; i < 10; i++)
+	{
+		bigString += '<li>';
+		bigString += hashlist[i];
+		bigString += '</li>'
+	}
+	bigString += '</ol>'
 
-	//var response = saveInput(hash1, hash2, hashlist);
-	//console.log(response);
-
+	fs.writeFile('views/hashlist.html', bigString, function (err) {
+  		if (err) throw err;
+  		console.log('It\'s saved!');
+	});
+	//end saving 
 	res.redirect('results');
 	res.location('/results');
 	console.log("post received", hash1, hash2);
