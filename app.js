@@ -29,14 +29,9 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', function (req, res)
-{
-    res.render('index.html');
-});
-app.get('/results', function (req, res)
-{
-	res.render('results.html');
-});
+app.get('/', function (req, res){res.render('index.html');});
+app.get('/results', function (req, res){res.render('results.html');});
+app.get('/hashlist',function (req, res){res.render('hashlist.html');});
 
 app.post('/form', function (req, res)
 {
@@ -45,18 +40,27 @@ app.post('/form', function (req, res)
 
 	var hashlist = new Array(10);
 	var hashfreq = new Array(10);
-	
-	fs.writeFile('views/hashlist.txt', hash1 + "\n" + hash2, function (err) {
-  		if (err) throw err;
-  		console.log('It\'s saved!');
-	});
 
+	//var response = saveInput(hash1, hash2, hashlist);
+	//console.log(response);
 
-	res.redirect('/results');
+	res.redirect('results');
 	res.location('/results');
 	console.log("post received", hash1, hash2);
 });
 
+
+
+//server junk 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+
+// lost pieces of code
+/*
+	fs.writeFile('views/hashlist.txt', hash1 + "\n" + hash2, function (err) {
+  		if (err) throw err;
+  		console.log('It\'s saved!');
+	});
+*/

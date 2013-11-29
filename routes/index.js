@@ -11,7 +11,6 @@ exports.results = function(req, res){
 	res.render('results', {title: 'Results'});
 };
 
-exports.saveInput = function(hash1, hash2, hashlist){
-  var buffer 
-
+exports.hashlist = function(req, res){
+  res.render('hashlist', {title: 'Hashlist'});
 };
