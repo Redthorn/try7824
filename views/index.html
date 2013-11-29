@@ -28,7 +28,7 @@
             month = "0" + month;
         if(day < 10) 
             day = "0" + day;
-        var today = month + '-' + day + '-' + now.getFullYear();
+        var today = now.getFullYear() + '-' + month + '-' + day;
         $('#endDate').val(today);
     });
       
