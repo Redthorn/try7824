@@ -117,7 +117,7 @@ app.post('/form', function (req, res)
 		}
 		else
 		{
-			bigString += hashlist[i] + '\(' + hashfreq[i] + '\)';
+			bigString += hashlist[i] + '\(' + hashfreq[i] + ' times searched\)';
 		}
 		bigString += '</li>'
 	}
