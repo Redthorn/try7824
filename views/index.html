@@ -7,9 +7,9 @@
     //display previous searches
     $(function display()
     {
-        $("#query1 span").html(localStorage.getItem('query1'));
-        $("#query2 span").html(localStorage.getItem('query2'));
-        $("#query3 span").html(localStorage.getItem('query3'));
+        $("#query1-2 span").html(localStorage.getItem('query1'));
+        $("#query3-4 span").html(localStorage.getItem('query2'));
+        $("#query5-6 span").html(localStorage.getItem('query3'));
     });
     //set default greyed-out text in query fields, and erase when clicked
     function inputFocus(i){
@@ -42,9 +42,9 @@
         var startDate = form.startDate.value;
         var endDate = form.endDate.value;
         //alert ("You typed:   " + Hashtag1 + "    " + Hashtag2);
-        localStorage.setItem('query3', localStorage.getItem('query1'));
-        localStorage.setItem('query1', Hashtag1);
-        localStorage.setItem('query2', Hashtag2);
+        localStorage.setItem('query3', localStorage.getItem('query2'));
+        localStorage.setItem('query2', localStorage.getItem('query1'));
+        localStorage.setItem('query1', Hashtag1 + '  #' + Hashtag2);
         localStorage.setItem('startDate', startDate);
         localStorage.setItem('endDate', endDate);
     }
@@ -111,9 +111,9 @@
 <div class="lastSearches">
   <h2>Your last 3 Searches</h2>
   <ul>
-    <li><div id="query1">#<span></span></div></li>
-    <li><div id="query2">#<span></span></div></li>
-    <li><div id="query3">#<span></span></div></li>
+    <li><div id="query1-2">#<span></span></div></li>
+    <li><div id="query3-4">#<span></span></div></li>
+    <li><div id="query5-6">#<span></span></div></li>
   </ul>
 </div>
   <h2>Top 10 Most Popular Searches</h2>
