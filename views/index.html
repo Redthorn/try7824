@@ -34,38 +34,59 @@
         $('#startDate').val(first);
     });
       
-    //store variables to localStorage 
+    //when submitted
     function testResults (form)
     {
         var Hashtag1 = form.textfield.value;
         var Hashtag2 = form.textfield2.value;
         var startDate = form.startDate.value;
         var endDate = form.endDate.value;
-        //alert ("You typed:   " + Hashtag1 + "    " + Hashtag2);
+        var radius = form.number.value;
+        //store variables
         localStorage.setItem('query3', localStorage.getItem('query2'));
         localStorage.setItem('query2', localStorage.getItem('query1'));
         localStorage.setItem('query1', Hashtag1 + '  #' + Hashtag2);
         localStorage.setItem('startDate', startDate);
         localStorage.setItem('endDate', endDate);
+        localStorage.setItem('radius', radius);
     }
-
-    //display top ten text
-      var xmlhttp;
-      if (window.XMLHttpRequest)
-      {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp=new XMLHttpRequest();
-        //alert("object created");
-      }
+   //check for location data
+    if (navigator.geolocation)
+    {
+      navigator.geolocation.getCurrentPosition(success,error);
+       console.log("Has location.");                     
+     }
       else
-      {// code for IE6, IE5
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-      }
-      xmlhttp.onreadystatechange=function()
-      {
-          document.getElementById("update").innerHTML=xmlhttp.responseText;
-      }
-        xmlhttp.open("GET","/hashlist",true);
-        xmlhttp.send();
+     {
+        console.log("Geolocation not supported.");
+      }           
+    function success(position){
+      $(function(){              
+        var lat = position.coords.latitude;
+        var lon = position.coords.longitude;
+        localStorage.setItem('latitude', lat);
+        localStorage.setItem('longitude', lon);
+      });
+     };            
+    function error(){
+      alert('error');
+    }    
+    //display top ten text
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+     {// code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp=new XMLHttpRequest();
+     }
+    else
+     {// code for IE6, IE5
+       xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+     }
+    xmlhttp.onreadystatechange=function()
+    {
+     document.getElementById("update").innerHTML=xmlhttp.responseText;
+    }
+      xmlhttp.open("GET","/hashlist",true);
+      xmlhttp.send();
 </script>
 <link rel="stylesheet" type="text/css" href="/stylesheets/soaringStyle.css">
 <title>Soaring Tunes</title>
