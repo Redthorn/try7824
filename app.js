@@ -33,15 +33,53 @@ app.get('/', function (req, res){res.render('index.html');});
 app.get('/results', function (req, res){res.render('results.html');});
 app.get('/hashlist',function (req, res){res.render('hashlist.html');});
 
+var hashlist = new Array(25);
+var hashfreq = new Array(25);
+for(var i=0; i<25; i++)
+{
+  hashlist[i]= 'undefined';
+  hashfreq[i]= 0;
+}
+
 app.post('/form', function (req, res)
 {
-	var hashlist = new Array(10);
-	var hashfreq = new Array(10);
 	var hash1 = (req.body.textfield).toLowerCase();
 	var hash2 = (req.body.textfield2).toLowerCase();
 
-	hashlist[0] = hash1;
-	hashlist[1] = hash2;
+	//search and insert input1 to arrays
+	for(var i=0; i < 25; i++)
+  	{
+    	var result = hash1.localeCompare(hashlist[i]);
+    	if(result == 0 && hashlist[i]!='undefined')
+    	{
+        	hashfreq[i] += 1;
+        	result = 0;
+        	break;
+    	}
+    	else if(result != 0 && hashlist[i]== 'undefined')
+    	{
+        	hashlist[i] = hash1;
+        	hashfreq[i] = 1;
+        	break;
+    	}
+  	}
+  	//above but for input2
+  	for(var i=0; i < 25; i++)
+  	{
+    	var result = hash2.localeCompare(hashlist[i]);
+    	if(result == 0 && hashlist[i]!='undefined')
+    	{
+        	hashfreq[i] += 1;
+        	result = 0;
+        	break;
+    	}
+    	else if(result != 0 && hashlist[i]== 'undefined')
+    	{
+        	hashlist[i] = hash2;
+        	hashfreq[i] = 1;
+        	break;
+    	}
+  	}
 
 	//save array to html file for ajax display
 	var bigString = '<ol>';
