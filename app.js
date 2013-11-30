@@ -80,6 +80,30 @@ app.post('/form', function (req, res)
         	break;
     	}
   	}
+  	//sort the fudging arrays by hashfreq
+  	var j = 0;
+  	var index = 0;
+  	while (j < 23)
+  	{
+  		var num = hashfreq[index+1] - hashfreq[index];
+  		if (num > 0)
+  		{
+  			var tempHash = hashlist[index];
+  			var tempNum = hashfreq[index];
+  			hashlist[index] = hashlist[index+1];
+  			hashfreq[index] = hashfreq[index+1];
+  			hashlist[index+1] = tempHash;
+  			hashfreq[index+1] = tempNum;
+  			index = 0;
+  			j = 0;
+  		}
+  		else if (num < 0 || num == 0)
+  		{
+  			index++;
+  			j++;
+  		}
+
+  	}
 
 	//save array to html file for ajax display
 	var bigString = '<ol>';
