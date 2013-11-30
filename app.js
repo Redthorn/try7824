@@ -117,7 +117,7 @@ app.post('/form', function (req, res)
 		}
 		else
 		{
-			if (hashlist[i] == 1)
+			if (hashfreq[i] == 1)
 			{
 				bigString += hashlist[i] + ' \(' + hashfreq[i] + ' time searched\)';
 			}
