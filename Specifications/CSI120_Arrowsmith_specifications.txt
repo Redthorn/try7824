@@ -1,0 +1,41 @@
+Mobile App Specifications (Gherkin Syntax) - Group Mashup Only                  Paul Turchinetz
+										John Ryan
+										Tyler Van Ollefen
+
+
+Feature: Use the Twitter API in conjunction with the SoundCloud API and Sentimental to play music based on Tweet content.
+
+Scenario: Client is a Twitter user and posts a tweet.
+	And: This tweet does not have a #soundcloud hashtag.
+
+	Given:Tweet has a positive Sentiment score.
+	Then: Play a random (genre1 - happy/peppy/loud/dance-y?) song from SoundCloud.
+
+     And
+
+	Given: Tweet has a negative Sentiment score.
+	Then: Play a random (genre2 - sad/hardcore/heavy/evil?) song from SoundCloud.
+
+     And
+
+	Given: Tweet has a neutral Sentiment score.	
+	Then: Play a random (genre3 - classical?) song from SoundCloud.
+
+
+Scenario: Client is a Twitter user and posts a tweet.
+	And: This tweet has at least a #soundcloud hashtag.
+
+	Given: A user also tweets a genre-related hashtag.
+
+	And: The genre is recognized.
+
+	Then: Play a song related to the genre.
+
+	And: The genre isn’t found.
+
+	Then: Play a song related to the sentiment score as per previous scenario.
+
+     And
+
+	Given: A user also tweets a non-genre-related hashtag.
+	Then: Play a song related to the sentiment score as per previous scenario.
