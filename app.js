@@ -86,7 +86,15 @@ app.post('/form', function (req, res)
 	for(var i=0; i < 10; i++)
 	{
 		bigString += '<li>';
-		bigString += '#' + hashlist[i];
+		bigString += '#';
+		if (hashlist[i] == 'undefined')
+		{
+			bigString += ' ';
+		}
+		else
+		{
+			bigString += hashlist[i] + '\(' + hashfreq[i] + '\)';
+		}
 		bigString += '</li>'
 	}
 	bigString += '</ol>'
