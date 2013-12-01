@@ -1,20 +1,37 @@
 <!doctype html>
 <html>
 <head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="/stylesheets/soaringStyleResult.css">
+<title>Soaring Tunes</title>
 <script src = "http://connect.soundcloud.com/sdk.js"></script>
 <script src = "http://code.jquery.com/jquery-1.9.1.js"></script>
 <script>
   $(function display()
   {
     $("#query1 span").html(localStorage.getItem('query1'));
+    var hash1 = localStorage.getItem('hash1');
+    var search_term = {
+      q: hash1
+    };
+    search(search_term);
   });
-
-  
-
+//send ajax request to twitter
+function search(search_term){
+    console.log('search sent');
+    $.ajax({
+      url:'https://api.twitter.com/1.1/search/tweets.json?' + $.param(search_term),
+      dataType: 'jsonp',
+      success: function(data){
+        console.dir(data);
+        for(item in data['results']){
+          $('#tweets').append(
+            '<li>' + data['results'][item]['text'] + '</li>');
+        }
+      }
+    });
+}
 </script>
-<meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="/stylesheets/soaringStyleResult.css">
-<title>Soaring Tunes</title>
 </head>
 
 <body>
@@ -26,16 +43,7 @@
   
     <div id="query1">#<span></span></div>
   <p>
-  <script>
-SC.initialize({
-  client_id: '02fb7331ca2e5e32bfdff4f3f38cbac8'
-});
 
-var track_url = 'http://soundcloud.com/forss/flickermood';
-SC.oEmbed(track_url, { auto_play: true }, function(oEmbed) {
-  console.log('oEmbed response: ' + oEmbed);
-});
-</script>
 	<strong>Sentiment Score:</strong> 101
 	</p>
   <p>
@@ -49,36 +57,9 @@ SC.oEmbed(track_url, { auto_play: true }, function(oEmbed) {
 	</p>
   <hr>
   <div class="scrollBox">
-  <ul>
-    <li>#1</li>
-    <li>#2</li>
-    <li>#3</li>
-    <li>#4</li>
-    <li>#5</li>
-    <li>#6</li>
-    <li>#7</li>
-    <li>#8</li>
-    <li>#9</li>
-    <li>#10</li>
-    <li>#11</li>
-    <li>#12</li>
-    <li>#13</li>
-    <li>#14</li>
-    <li>#15</li>
-    <li>#16</li>
-    <li>#17</li>
-    <li>#18</li>
-    <li>#19</li>
-    <li>#20</li>
-    <li>just placeholders, output will be looped</li>
-  </ul>
+  <ul id="tweets"></ul>
 </div>
-<figure>
-  <figcaption></figcaption>
-</figure>
 </div>
-
-<br><br><br><br><br><br><br><br><br>
 </body>
 
     <footer>

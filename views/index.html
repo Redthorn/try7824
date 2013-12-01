@@ -39,16 +39,11 @@
     {
         var Hashtag1 = form.textfield.value;
         var Hashtag2 = form.textfield2.value;
-        var startDate = form.startDate.value;
-        var endDate = form.endDate.value;
-        var radius = form.number.value;
+
         //store variables
         localStorage.setItem('query3', localStorage.getItem('query2'));
         localStorage.setItem('query2', localStorage.getItem('query1'));
         localStorage.setItem('query1', Hashtag1 + '  #' + Hashtag2);
-        localStorage.setItem('startDate', startDate);
-        localStorage.setItem('endDate', endDate);
-        localStorage.setItem('radius', radius);
     }
    //check for location data
     if (navigator.geolocation)
@@ -64,8 +59,8 @@
       $(function(){              
         var lat = position.coords.latitude;
         var lon = position.coords.longitude;
-        localStorage.setItem('latitude', lat);
-        localStorage.setItem('longitude', lon);
+        $('#lat').val(lat);
+        $('#lon').val(lon);
       });
      };            
     function error(){
@@ -120,10 +115,22 @@
     <input type="date" name="endDate" id="endDate">
   </span>
   </p>
-  <h3>Search Radius</h3>
+  <h3>Search Radius and Current Location</h3>
   <p>
+    <span>
     <label for="number"> Radius (miles): </label>
     <input name="number" type="number" id="number" max="250" min="1" value="25">
+    </span>
+  </p>
+  <p>
+  <span>
+    <label for="lat">Lat:</label>
+    <input type="text" name="lat" id="lat">
+  </span>
+  <span>
+    <label for="lon">Lon:</label>
+    <input type="text" name="lon" id="lon">
+  </span>
   </p>
   <p>
     <input type="submit" name="submit" id="submit" value="Submit" onClick="testResults(this.form)">

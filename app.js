@@ -8,6 +8,7 @@ var http = require('http');
 var path = require('path');
 var fs = require('fs');
 
+
 var app = express();
 
 // all environments
@@ -45,6 +46,12 @@ app.post('/form', function (req, res)
 {
 	var hash1 = (req.body.textfield).toLowerCase();
 	var hash2 = (req.body.textfield2).toLowerCase();
+  var startDate = (req.body.startDate);
+  var endDate = (req.body.endDate);
+  var radius = (req.body.number);
+  var lat = (req.body.lat);
+  var lon = (req.body.lon);
+  console.log(hash1,hash2,startDate,endDate,radius,lat,lon);
 
 	//search and insert input1 to arrays
 	for(var i=0; i < 25; i++)
@@ -146,12 +153,3 @@ app.post('/form', function (req, res)
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-
-
-// lost pieces of code
-/*
-	fs.writeFile('views/hashlist.txt', hash1 + "\n" + hash2, function (err) {
-  		if (err) throw err;
-  		console.log('It\'s saved!');
-	});
-*/
