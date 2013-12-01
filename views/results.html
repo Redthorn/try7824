@@ -10,27 +10,7 @@
   $(function display()
   {
     $("#query1 span").html(localStorage.getItem('query1'));
-    var hash1 = localStorage.getItem('hash1');
-    var search_term = {
-      q: hash1
-    };
-    search(search_term);
   });
-//send ajax request to twitter
-function search(search_term){
-    console.log('search sent');
-    $.ajax({
-      url:'https://api.twitter.com/1.1/search/tweets.json?' + $.param(search_term),
-      dataType: 'jsonp',
-      success: function(data){
-        console.dir(data);
-        for(item in data['results']){
-          $('#tweets').append(
-            '<li>' + data['results'][item]['text'] + '</li>');
-        }
-      }
-    });
-}
 </script>
 </head>
 
