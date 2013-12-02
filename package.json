@@ -6,7 +6,8 @@
   "dependencies": {
     "express": "latest",
     "ejs": "latest",
-    "ntwitter": "latest"
+    "ntwitter": "latest",
+    "sentiment": "latest"
   },
   "engines": {
     "node": "0.10.13",

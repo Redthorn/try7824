@@ -7,7 +7,8 @@ var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 var fs = require('fs');
-
+var twitter = require('ntwitter');
+var sentiment = require('sentiment');
 
 var app = express();
 
@@ -32,7 +33,25 @@ if ('development' == app.get('env')) {
 
 app.get('/', function (req, res){res.render('index.html');});
 app.get('/results', function (req, res){res.render('results.html');});
-app.get('/hashlist',function (req, res){res.render('hashlist.html');});
+app.get('/hashlist', function (req, res){res.render('hashlist.html');});
+app.get('/selection', function (req, res){res.render('selection.html');});
+
+//authenticate with twitter dev account
+var twit = new twitter({
+  consumer_key: 'zjVQiFUnRX5ikVCLVgIw',
+  consumer_secret: 'pNllpbhujW2inNcNCQ8ktIIQGRaL70dzLBm9tXNLHLc',
+  access_token_key: '43466231-KhsLhbx53cgremwCTYeY80na6FfCoUwiPlNO5ylaL',
+  access_token_secret: 'tF7bYNLjDLcOZRmuhUSK0lucn4ZkF1jGZgbRs0DGPQOMb'
+});
+ twit
+   .verifyCredentials(function (err, data) {
+    console.log("Verifying Credentials...");
+    if(err)
+      console.log("Verification Failed : " + err)
+      else
+          //console.log(data);
+        console.log("Verification Success");
+})
 
 var hashlist = new Array(25);
 var hashfreq = new Array(25);
@@ -51,7 +70,48 @@ app.post('/form', function (req, res)
   var radius = (req.body.number);
   var lat = (req.body.lat);
   var lon = (req.body.lon);
-  console.log(hash1,hash2,startDate,endDate,radius,lat,lon);
+  //console.log(hash1,hash2,startDate,endDate,radius,lat,lon);
+
+  //sentiment evaluation and construct soundcloud api implementation
+  var score1, score2, Total;
+  sentiment(hash1, function (err, result1){
+    score1 = (result1.score);
+  });
+  sentiment(hash2, function (err, result2){
+    score2 = (result2.score);
+  });
+  Total = score1 + score2;
+  var string = '<strong>Sentiment Score:</strong> ' + score1 + ' + ' + score2 + ' = ' + Total + '<p>';
+  if(Total == 0)
+  {
+    string += 'Neutral Sentiment: ';
+  }
+  else if(Total < 0)
+  {
+    string += 'Negative Sentiment: ';
+  }
+  else if(Total > 0)
+  {
+    string += 'Positive Sentiment: ';
+  }
+  string += '</p><p><iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/'
+  if(Total == 0)
+  {
+    string += '60360398';
+  }
+  else if(Total < 0)
+  {
+    string += '85910201';
+  }
+  else if(Total > 0)
+  {
+    string += '106687285';
+  }
+  string += '&amp;color=00FF00&amp;auto_play=false&amp;show_artwork=true"></iframe></p>';
+  fs.writeFile('views/selection.html', string, function (err) {
+      if (err) throw err;
+      console.log('Sentiment saved!');
+  });
 
 	//search and insert input1 to arrays
 	for(var i=0; i < 25; i++)

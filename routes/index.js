@@ -14,3 +14,7 @@ exports.results = function(req, res){
 exports.hashlist = function(req, res){
   res.render('hashlist', {title: 'Hashlist'});
 };
+
+exports.selection = function(req, res){
+  res.render('selection', {title: 'Selection'});
+};
