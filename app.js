@@ -82,31 +82,50 @@ app.post('/form', function (req, res)
   });
   Total = score1 + score2;
   var string = '<strong>Sentiment Score:</strong> ' + score1 + ' + ' + score2 + ' = ' + Total + '<p>';
-  if(Total == 0)
+  if(Total < 1 && Total > -1)
   {
-    string += 'Neutral Sentiment: ';
+    string += 'Neutral Sentiment: ' + '<p> (-4)  (-3 - -2) <b>(-1 - +1)</b> (+2 - +3) (4+)';
   }
-  else if(Total < 0)
+  else if(Total == -2 || Total == -3)
   {
-    string += 'Negative Sentiment: ';
+    string += 'Negative Sentiment: ' + '<p> (-4)  <b>(-3 - -2)</b> (-1 - +1) (+2 - +3) (4+)';
   }
-  else if(Total > 0)
+  else if(Total == 2 || Total == 3)
   {
-    string += 'Positive Sentiment: ';
+    string += 'Positive Sentiment: ' + '<p> (-4)  (-3 - -2) (-1 - +1) <b>(+2 - +3)</b> (4+)';
   }
+  else if (Total >= 4)
+  {
+    string += 'Very Positive Sentiment: ' + '<p> (-4)  (-3 - -2) (-1 - +1) (+2 - +3) <b>(4+)</b>';
+  }
+  else if (Total <= -4)
+  {
+    string += 'Very Negative Sentiment: ' + '<p> <b>(-4)</b>  (-3 - -2) (-1 - +1) (+2 - +3) (4+)';
+  }
+
   string += '</p><p><iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/'
-  if(Total == 0)
+
+  if(Total < 1 && Total > -1)
   {
     string += '85910201';
   }
-  else if(Total < 0)
+  else if(Total == -2 || Total == -3)
   {
     string += '60360398';
   }
-  else if(Total > 0)
+  else if(Total == 2 || Total == 3)
+  {
+    string += '65625445';
+  }
+  else if (Total >= 4)
   {
     string += '106687285';
   }
+  else if (Total <= -4)
+  {
+    string += '122952876';
+  }
+
   string += '&amp;color=00FF00&amp;auto_play=false&amp;show_artwork=true"></iframe></p>';
   fs.writeFile('views/selection.html', string, function (err) {
       if (err) throw err;
