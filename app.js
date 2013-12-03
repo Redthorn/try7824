@@ -82,7 +82,7 @@ app.post('/form', function (req, res)
   });
   Total = score1 + score2;
   var string = '<strong>Sentiment Score:</strong> ' + score1 + ' + ' + score2 + ' = ' + Total + '<p>';
-  if(Total < 1 && Total > -1)
+  if(Total <= 1 && Total >= -1)
   {
     string += 'Neutral Sentiment: ' + '<p> (-4)  (-3 - -2) <b>(-1 - +1)</b> (+2 - +3) (4+)';
   }
@@ -105,7 +105,7 @@ app.post('/form', function (req, res)
 
   string += '</p><p><iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/'
 
-  if(Total < 1 && Total > -1)
+  if(Total <= 1 && Total >= -1)
   {
     string += '85910201';
   }
